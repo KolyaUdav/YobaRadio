@@ -1,0 +1,4 @@
+# Игнорировать .jpg
+*.jpg
+# Кроме NoImage.jpg
+!NoImage.jpg
