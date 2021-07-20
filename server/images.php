@@ -29,13 +29,33 @@ function check_deleted_images_in_directory($images_db, $images_dir) {
     return $deleted_images;
 }
 
+function check_deleted_images_in_db($audio_to_delete, $images_dir) {
+    $images_to_delete = [];
+
+    foreach ($audio_to_delete as $atd) {
+        $image_name = get_name_without_ext($atd).'.jpg';
+
+        if (in_array($image_name, $images_dir)) {
+            array_push($images_to_delete, $image_name);
+        }
+    }
+
+    return $images_to_delete;
+}
+
+function remove_images_from_directory($images_to_delete) {
+    foreach ($images_to_delete as $itd) {
+        unlink(IMAGES_PATH.'/'.$itd);
+    }
+}
+
 function get_data_from_db_no_image($data_arr, $link) {
     $audio_arr = [];
     $images_arr = [];
 
     /**Ищем композиции, у которых отсутствует изображение */
     for ($i = 0; $i < count($data_arr['images']); $i++) {
-        if ($data_arr['images'][$i] === 'NoImage.jpg') {
+        if ($data_arr['images'][$i] === NO_IMAGE) {
             array_push($audio_arr, $data_arr['audio'][$i]);
             array_push($images_arr, $data_arr['images'][$i]);
         }
