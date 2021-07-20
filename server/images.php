@@ -35,7 +35,7 @@ function check_deleted_images_in_db($audio_to_delete, $images_dir) {
     foreach ($audio_to_delete as $atd) {
         $image_name = get_name_without_ext($atd).'.jpg';
 
-        if (in_array($image_name, $images_dir)) {
+        if (in_array($image_name, $images_dir) && $image_name != NO_IMAGE) {
             array_push($images_to_delete, $image_name);
         }
     }
