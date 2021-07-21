@@ -18,12 +18,15 @@ body {
 .music-container {
     background-color: #fff;
     border-radius: 15px;
-    box-shadow: 0 20px 20px 0 rgba(252, 169, 169, 0.6);
-    display: flex;
-    padding: 20px 30px;
     position: relative;
+    box-shadow: 0 20px 20px 0 rgba(252, 169, 169, 0.6);
+    padding: 20px 30px;
     margin: 100px 0;
     z-index: 10;
+}
+
+.img-n-navigation-container {
+    display: flex;
 }
 
 .img-container {
@@ -133,4 +136,33 @@ body {
     height: 100%;
     width: 0%;
     transition: width 0.1s linear;
+}
+
+.volume-container {
+    background-color: rgb(243, 225, 234);
+    cursor: pointer;
+    width: 80%;
+    height: 5px;
+    margin: 20px auto 0px auto;
+}
+
+.volume {
+    position: relative;
+    background-color: #fe8daa;
+    height: 100%;
+    width: 0%;
+    border-radius: 5px;
+}
+
+.volume::after {
+    content: '';
+    display: block;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    transform: translate(calc(50% - 2.5px), 25%);
+    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+    background-color: #f57393;
 }

@@ -12,11 +12,15 @@ const progressContainer = document.querySelector('.progress-container');
 const title = document.querySelector('#title');
 const cover = document.querySelector('#cover');
 
+const volumeContainer = document.querySelector('.volume-container');
+const volume = document.querySelector('#volume');
+
 // Список песе
 
-var songIndex = 0;
-
-var songs = [];
+let songIndex = 0;
+let volumeIsClick = false;
+let currentVolume = 0.5;
+let songs = [];
 
 getSongsFromServer(addSongsToArray);
 
@@ -31,6 +35,7 @@ function getSongsFromServer(callback) {
 function addSongsToArray(arr) {
     songs = arr;
     loadSong(songs['audio'][songIndex], songs['images'][songIndex]);
+    setDefaultVolume();
 }
 
 function loadSong(audio_src, image_src) {
@@ -98,6 +103,32 @@ function setProgress(e) {
     audio.currentTime = (clickX / width) * duration;
 }
 
+function volumeMouseUp() {
+    volumeIsClick = false;
+}
+
+function volumeMouseDown() {
+    volumeIsClick = true;
+}
+
+function setDefaultVolume() {
+    audio.volume = currentVolume;
+    volume.style.width = (currentVolume / 1 * 100) + '%';
+    
+}
+
+function setVolume(e) {
+    if (volumeIsClick === true) {
+        const width = this.clientWidth;
+        const clickX = e.offsetX;
+        currentVolume = clickX / width;
+        if (currentVolume > 1) currentVolume = 1;
+        if (currentVolume < 0) currentVolume = 0;
+        audio.volume = currentVolume;
+        volume.style.width = (audio.volume * 100) + '%';
+    }
+}
+
 // Listeners
 
 playBtn.addEventListener('click', () => {
@@ -118,3 +149,7 @@ audio.addEventListener('timeupdate', updateProgress);
 audio.addEventListener('ended', nextSong);
 
 progressContainer.addEventListener('click', setProgress);
+
+volumeContainer.addEventListener('mousemove', setVolume);
+volumeContainer.addEventListener('mouseup', volumeMouseUp);
+volumeContainer.addEventListener('mousedown', volumeMouseDown);
