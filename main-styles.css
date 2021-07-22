@@ -8,11 +8,26 @@ body {
     height: 100vh;
     margin: 0;
     font-family: 'Lato', sans-serif;
-    background-image: linear-gradient(0deg, rgb(247, 247, 247) 23.8%, rgb(252, 221, 221) 92%);
+    background-image: linear-gradient(0deg, rgb(247, 247, 247) 23.8%, rgb(245, 208, 174) 92%);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+}
+
+.title-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo {
+    width: 60px;
+    margin-right: 10px;
+}
+
+.logo > img {
+    width: inherit;
 }
 
 .music-container {
@@ -131,7 +146,7 @@ body {
 }
 
 .progress {
-    background-color: #fe8daa;
+    background-color: #feb68d;
     border-radius: 5px;
     height: 100%;
     width: 0%;
@@ -148,7 +163,7 @@ body {
 
 .volume {
     position: relative;
-    background-color: #fe8daa;
+    background-color: #feb68d;
     height: 100%;
     width: 0%;
     border-radius: 5px;
@@ -164,5 +179,5 @@ body {
     border-radius: 50%;
     width: 10px;
     height: 10px;
-    background-color: #f57393;
+    background-color: #feb68d;
 }

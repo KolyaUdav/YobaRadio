@@ -33,7 +33,9 @@ function getSongsFromServer(callback) {
 }
 
 function addSongsToArray(arr) {
-    songs = arr;
+    songs = shuffleAudioAndImages(arr);
+    console.log(songs);
+    songIndex = getRandomInt(songs.length);
     loadSong(songs['audio'][songIndex], songs['images'][songIndex]);
     setDefaultVolume();
 }
@@ -129,7 +131,31 @@ function setVolume(e) {
     }
 }
 
-// Listeners
+function getRandomInt(max) {
+    return Math.floor(Math.random() * max);
+}
+
+function shuffleAudioAndImages(arr) {
+    let shuffledAudioAndImages = [];
+    let shuffledAudio = [];
+    let shuffledImages = [];
+    
+
+    while (arr['audio'].length > 0) {
+        let randomIndex = getRandomInt(arr['audio'].length);
+
+        shuffledAudio.push(arr['audio'][randomIndex]);
+        shuffledImages.push(arr['images'][randomIndex]);
+
+        arr['audio'].splice(randomIndex, 1);
+        arr['images'].splice(randomIndex, 1);
+    }
+
+    shuffledAudioAndImages['audio'] = shuffledAudio;
+    shuffledAudioAndImages['images'] = shuffledImages;
+
+    return shuffledAudioAndImages;
+}
 
 playBtn.addEventListener('click', () => {
     const isPlaying = musicContainer.classList.contains('play');
